@@ -1,14 +1,6 @@
 import pandas as pd
 import tensorflow as tf
 import numpy as np
-import random
-
-from datetime import datetime
-
-from sklearn.metrics import roc_auc_score, roc_curve, auc, precision_recall_curve
-from sklearn.preprocessing import StandardScaler, MinMaxScaler
-from sklearn.impute import SimpleImputer
-from sklearn.model_selection import train_test_split
 from sklearn.utils import shuffle
 
 print(tf.__version__)
@@ -24,6 +16,7 @@ last_session = 144
 dat = pd.read_csv('.../data.csv')
 
 # Get unique IDs for each condition
+np.random.seed(292)
 ids_clust3_train1 = dat.loc[(dat['clust'] == 3) & (dat['train'] == 1), 'id'].unique()
 ids_clust2_train1 = dat.loc[(dat['clust'] == 2) & (dat['train'] == 1), 'id'].unique()
 
@@ -141,7 +134,7 @@ print('NN training data shape:', X1_train.shape)
 print('X1 columns:', X1_train.columns)
 
 # For sequential data features (X)
-sequential_features = X_train.columns.tolist()  # Replace X_train with your original DataFrame
+sequential_features = X_train.columns.tolist() 
 print("Sequential Features:", sequential_features)
 
 # For summary data features (X1)
@@ -180,7 +173,7 @@ y_train = y_train.astype("int32")
 y_valid = y_valid.astype("int32")
 y_ztest = y_ztest.astype("int32")
 
-y_train = y_train.to_numpy()  # Convert DataFrame to NumPy array
+y_train = y_train.to_numpy() 
 y_valid = y_valid.to_numpy()
 y_ztest = y_ztest.to_numpy()
 
